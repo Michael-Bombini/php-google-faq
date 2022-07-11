@@ -42,13 +42,12 @@ $db = [
         [
             "La società consociata Google che offre i servizi, tratta le tue informazioni ed è responsabile del rispetto delle leggi sulla privacy vigenti. Generalmente Google offre i propri servizi per i consumatori tramite una delle due società seguenti:",
             "La versione dei termini che regola il nostro rapporto, che può variare in base alle leggi locali.",
-            "sublist" =>
+        ],
+        "sublist" =>
         [
             "Google Ireland Limited, se gli utenti sono residenti nello Spazio economico europeo (paesi dell'Unione europea, oltre a Islanda, Liechtenstein e Norvegia) o in Svizzera.",
             "Google LLC, con sede negli Stati Uniti, per il resto del mondo.",
         ]
-        ],
-        
 
     ],
 
@@ -86,6 +85,11 @@ $db = [
 <html lang="en">
 
 <head>
+    <style>
+        .letter-list {
+            list-style-type: lower-latin;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,14 +109,18 @@ $db = [
             }
             if (key_exists("list", $faq)) {
                 echo "<ol>";
-                foreach ($faq["list"] as $item) {
+                foreach ($faq["list"] as $index => $item) {
                     echo "<li>" . $item . "</li>";
-                    if (key_exists("sublist", $faq["list"])) {
-                        foreach ($faq["list"]["sublist"] as $subitem) {
+                    if($index===0){
+                    if (key_exists("sublist", $faq)) {
+                        echo "<ol class='letter-list'>";
+                        foreach ($faq["sublist"] as $subitem) {
                             echo "<li>" . $subitem . "</li>";
                         }
+                        echo "</ol>";
                     }
                 }
+            }
                 echo "</ol>";
             }
             if (key_exists("subtitle", $faq)) {
